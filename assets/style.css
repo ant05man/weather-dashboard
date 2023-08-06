@@ -1,3 +1,9 @@
 h1 {
-    background-color: orangered;
+    margin-bottom: 0%;
+    background: linear-gradient(105.6deg, rgb(246, 220, 111) 12.4%, rgb(222, 104, 104) 78.7%);
+}
+
+#forecast {
+    position: absolute;
+    left: -3%;
 }
