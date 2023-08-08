@@ -7,18 +7,12 @@ $(document).ready(function () {
 
     //empty input field.
     $("#search-value").val("");
+    //allows function to execute when search button is clicked
     weatherFunction(searchTerm);
+    //forecast pops up when search button is clicked
     weatherForecast(searchTerm);
   });
 
-  //search button enter key feature. 
-  $("#search-button").keypress(function (event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode === 13) {
-      weatherFunction(searchTerm);
-      weatherForecast(searchTerm);
-    }
-  });
 
   //pull previous searches from local storage
   var history = JSON.parse(localStorage.getItem("history")) || [];
@@ -129,12 +123,17 @@ $(document).ready(function () {
 
           var titleFive = $("<h3>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
           var imgFive = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
-          var colFive = $("<div>").addClass("col-md-10");
+          var colFive = $("<div>").addClass("col-md-2");
           var cardFive = $("<div>").addClass("card bg-primary text-white");
           var cardBodyFive = $("<div>").addClass("card-body p-2");
           var humidFive = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
           var tempFive = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp + " °F");
 
+
+                    //merge together and put on page
+                    colFive.append(cardFive.append(cardBodyFive.append(titleFive, imgFive, tempFive, humidFive)));
+                    //append card to column, body to card, and other elements to body
+                    $("#forecast .row").append(colFive);
         }
       }
     });
